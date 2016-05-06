@@ -4,6 +4,11 @@ import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -46,7 +51,24 @@ public class Scheme {
 	 * @param xml XML as source
 	 */
 	private void loadXML(InputSource xml) throws SchemeParseError{
-		
+		try{
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			dbf.setValidating(true);
+			dbf.setNamespaceAware(true);
+			
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(xml);
+			
+			NodeList nlpages = doc.getElementsByTagName("page");
+			
+			for(int i = 0; i < nlpages.getLength(); i++){
+				IPageScheme page = new PageScheme(nlpages.item(i));
+				pages.put(page.getPageName(), page);
+			}
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -54,7 +76,7 @@ public class Scheme {
 	 * @return
 	 */
 	public Set<String> getPagesName(){
-		return null;
+		return pages.keySet();
 	}
 	
 	/**
@@ -63,6 +85,6 @@ public class Scheme {
 	 * @return page scheme or null
 	 */
 	public IPageScheme getPage(String name){
-		return null;
+		return pages.get(name);
 	}
 }
