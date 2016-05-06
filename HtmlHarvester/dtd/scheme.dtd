@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT scheme (page*) >
+<!ELEMENT page (data*) >
+<!ATTLIST page name ID #REQUIRED >
+
+<!ELEMENT data (xpath, xargs*) >
+<!ATTLIST data name ID #REQUIRED >
+<!ATTLIST data all (0 | 1) "1" #FIXED>
+<!ATTLIST data type (txt | att | xml) #REQUIRED >
+
+<!ELEMENT xpath (#PCDATA) >
+
+<!ELEMENT xargs (arg+) >
+<!ATTLIST xargs id ID #REQUIRED >
+
+<!ELEMENT arg (#PCDATA) >

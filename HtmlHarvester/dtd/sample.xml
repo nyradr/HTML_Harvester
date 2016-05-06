@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE scheme DOCTYPE "dtd/scheme.dtd" >
+
+<scheme>
+	<page name="p1">
+		<data name="dp1" all="1" type="txt">
+			<xpath>//xp[@att='a1']/a2</xpath>
+			<xargs id='a1'>
+				<arg>val</arg>
+				<arg>nval</arg>
+			</xargs>
+			<xargs id='a2'>
+				<arg>elem</arg>
+				<arg>nelem</arg>
+			</xargs>
+		</data>
+	</page>
+</scheme>
