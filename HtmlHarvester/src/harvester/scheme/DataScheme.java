@@ -76,7 +76,7 @@ class DataScheme implements IDataScheme{
 		// get xpath value
 		try{
 			NodeList nlxp = e.getElementsByTagName("xpath");
-			baseXPath = nlxp.item(0).getNodeValue();
+			baseXPath = nlxp.item(0).getTextContent();
 		}catch(Exception ex){
 			throw new SchemeParseError();
 		}
@@ -101,8 +101,8 @@ class DataScheme implements IDataScheme{
 			Set<String > arg_val = new HashSet<>();
 			
 			NodeList nlval = arg.getElementsByTagName("arg");
-			for(int j = 0; j < nlargs.getLength(); i++)
-				arg_val.add(nlval.item(i).getNodeValue());
+			for(int j = 0; j < nlval.getLength(); j++)
+				arg_val.add(nlval.item(j).getTextContent());
 			
 			args.put(arg_name, arg_val);
 		}

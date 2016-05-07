@@ -2,6 +2,7 @@ package harvester.scheme;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,6 +19,7 @@ class PageScheme implements IPageScheme{
 	
 	public PageScheme(Node p) throws SchemeParseError{
 		Element page = (Element) p;
+		datas = new TreeMap<>();
 		
 		name = page.getAttribute("name");
 		
