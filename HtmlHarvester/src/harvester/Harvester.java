@@ -1,5 +1,6 @@
 package harvester;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
@@ -7,6 +8,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
+import harvester.data.IData;
 import harvester.data.IPage;
 import harvester.scheme.IPageScheme;
 import harvester.scheme.Scheme;
@@ -86,5 +88,25 @@ public class Harvester {
 	 */
 	public void setBrowser(WebClient c){
 		browser = c;
+	}
+	
+	public static void main(String [] a) throws Exception{
+		Scheme sc = new Scheme(new File("dtd/test.xml"));
+		Harvester hv = new Harvester(sc);
+		
+		IPage page = hv.get("https://lite.qwant.com/?q=qwant&t=web", "ql");
+		
+		System.out.println("P : " + page.getName());
+		
+		for(String dn : page.getDatasName()){
+			IData data = page.getByName(dn);
+			
+			System.out.println(" D : " + dn);
+			
+			for(String res : data.getTexts()){
+				System.out.println(" R : " + res);
+			}
+		}
+		
 	}
 }
