@@ -6,7 +6,7 @@
 
 <!ELEMENT data (xpath, xargs*) >
 <!ATTLIST data name ID #REQUIRED >
-<!ATTLIST data all (0 | 1) "1" #FIXED>
+<!ATTLIST data all (0 | 1) "1">
 <!ATTLIST data type (txt | att | xml) #REQUIRED >
 
 <!ELEMENT xpath (#PCDATA) >
