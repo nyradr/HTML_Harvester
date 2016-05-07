@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE scheme SYSTEM "dtd/scheme.dtd" >
+<scheme>
+	<page name="ql">
+		<data name="res" all="0" type="txt">
+			<xpath>//div[@class='arg1']/span[@class='arg2']/a</xpath>
+			<xargs id="arg1">
+				<arg>result</arg>
+			</xargs>
+			<xargs id="arg2">
+				<arg>title</arg>
+			</xargs>
+		</data>
+	</page>
+</scheme>
