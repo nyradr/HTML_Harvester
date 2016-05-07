@@ -30,5 +30,5 @@ public interface IData {
 	 * If the XPath is invalid or there is no available values, an empty string is returned.
 	 * @return
 	 */
-	public List<String> getText();
+	public String getText();
 }
