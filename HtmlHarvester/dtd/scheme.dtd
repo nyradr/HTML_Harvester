@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--	XML DTD scheme for HtmlHarvester
+-->
 
-<!ELEMENT scheme (page*) >
+<!ELEMENT scheme (page*, form*) >
+
+<!-- A page scheme
+	Page element is used to get data from HTML document
+-->
 <!ELEMENT page (data*) >
 <!ATTLIST page name ID #REQUIRED >
 
+<!-- Page data element
+	A data is a part of an HTML document (attribute value, text or XML)
+-->
 <!ELEMENT data (xpath, xargs*) >
 <!ATTLIST data name ID #REQUIRED >
 <!ATTLIST data all (0 | 1) "1">
 <!ATTLIST data type (txt | att | xml) #REQUIRED >
+
+<!-- A form scheme
+	Form element is used to fill and submit HTML form
+-->
+<!ELEMENT form (path, input*, submit) >
+
+<!-- Path to access form -->
+<!ELEMENT path (xpath, xargs*) >
+
+<!-- Form input field
+	if an input field in form is'nt referenced here, he will be set to his default value
+	
+	input text is used as default value
+	If the user doesn't define the value, default value will be used
+-->
+<!ELEMENT input (#PCDATA) >
+
+<!-- Submit button
+	The Xpath of the button can be relative to the form or absolute
+	Set useform attribute to "0" to use the absolute XPath
+-->
+<!ELEMENT submit (xpath, xargs*) >
+<!ATTLIST submit useform (0 | 1) "1" >
+
+<!-- Data resulting of the page submission
+	PCDATA is a reference to a page previously defined
+-->
+<!ELEMENT result (page | #PCDATA) >
+
+
+<!-- XPath expression and arguments
+	At processing xargs values will replace xargs id in the XPath expression
+-->
 
 <!ELEMENT xpath (#PCDATA) >
 
