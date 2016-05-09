@@ -21,7 +21,8 @@
 <!-- A form scheme
 	Form element is used to fill and submit HTML form
 -->
-<!ELEMENT form (path, input*, submit) >
+<!ELEMENT form (path, input*, submit, result) >
+<!ATTLIST form name ID #REQUIRED >
 
 <!-- Path to access form -->
 <!ELEMENT path (xpath, xargs*) >
@@ -33,8 +34,9 @@
 	If the user doesn't define the value, default value will be used
 -->
 <!ELEMENT input (#PCDATA) >
+<!ATTLIST input name ID #REQUIRED >
 
-<!-- Submit button
+<!-- Submit1 button
 	The Xpath of the button can be relative to the form or absolute
 	Set useform attribute to "0" to use the absolute XPath
 -->
