@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE scheme SYSTEM "https://raw.githubusercontent.com/nyradr/HTML_Harvester/master/HtmlHarvester/dtd/scheme.dtd">
+
+<scheme>
+	<page name="rp">
+		<data name="" type="txt">
+			<xpath>//a</xpath>
+		</data>
+	</page>
+	<form>
+		<path>
+			<xpath>//xp[@class='cls']</xpath>
+			<xargs id="cls">
+				<arg>foo</arg>
+				<arg>bar</arg>
+			</xargs>
+		</path>
+		<input></input>
+		<submit>
+			<xpath>//input[@type='submit']</xpath>
+		</submit>
+		<result>rp</result>
+	</form>
+</scheme>
