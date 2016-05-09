@@ -1,7 +1,8 @@
 package harvester.scheme;
 
 /**
- * Scheme parse error
+ * Scheme parse error<br>
+ * Global error handler for each errors produced at Scheme parsing
  * @author nyradr
  */
 public class SchemeParseError extends Exception{
@@ -15,6 +16,6 @@ public class SchemeParseError extends Exception{
 	}
 	
 	public SchemeParseError(Exception e){
-		super(e.getMessage());
+		super(e);
 	}
 }
