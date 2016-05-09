@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE scheme SYSTEM "https://raw.githubusercontent.com/nyradr/HTML_Harvester/master/HtmlHarvester/dtd/scheme.dtd">
+<!DOCTYPE scheme SYSTEM "dtd/scheme.dtd">
 
 <scheme>
 	<page name="rp">
-		<data name="" type="txt">
+		<data name="dt" type="txt">
 			<xpath>//a</xpath>
 		</data>
 	</page>
-	<form>
+	<form name="fname">
 		<path>
 			<xpath>//xp[@class='cls']</xpath>
 			<xargs id="cls">
@@ -15,7 +15,7 @@
 				<arg>bar</arg>
 			</xargs>
 		</path>
-		<input></input>
+		<input name="inp">defval</input>
 		<submit>
 			<xpath>//input[@type='submit']</xpath>
 		</submit>

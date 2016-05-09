@@ -46,7 +46,7 @@
 <!-- Data resulting of the page submission
 	PCDATA is a reference to a page previously defined
 -->
-<!ELEMENT result (page | PCDATA) >
+<!ELEMENT result (#PCDATA | page)* >
 
 
 <!-- XPath expression and arguments
