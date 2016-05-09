@@ -65,6 +65,9 @@ class DataScheme implements IDataScheme{
 		name = e.getAttribute("name");
 		all = e.getAttribute("all").equals("1");
 		type = DataType.fromString(e.getAttribute("type"));
+		
+		if(type == null)
+			throw new SchemeParseError("Invalid data type");
 	}
 	
 	/**
@@ -78,7 +81,7 @@ class DataScheme implements IDataScheme{
 			NodeList nlxp = e.getElementsByTagName("xpath");
 			baseXPath = nlxp.item(0).getTextContent();
 		}catch(Exception ex){
-			throw new SchemeParseError();
+			throw new SchemeParseError("Data without XPAth");
 		}
 	}
 	
@@ -96,7 +99,7 @@ class DataScheme implements IDataScheme{
 			
 			String arg_name = arg.getAttribute("id");
 			if(arg_name.isEmpty())
-				throw new SchemeParseError();
+				throw new SchemeParseError("XPath argument without id");
 			
 			Set<String > arg_val = new HashSet<>();
 			

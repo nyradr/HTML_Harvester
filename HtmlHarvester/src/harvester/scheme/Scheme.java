@@ -3,6 +3,7 @@ package harvester.scheme;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.StringReader;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -12,7 +13,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * HTML harvester pages scheme
@@ -28,6 +32,7 @@ public class Scheme {
 	 * @throws SchemeParseError
 	 */
 	public Scheme(String xml) throws SchemeParseError{
+		loadXML(new InputSource(new StringReader(xml)));
 	}
 	
 	/**
@@ -61,6 +66,7 @@ public class Scheme {
 			dbf.setNamespaceAware(true);
 			
 			DocumentBuilder db = dbf.newDocumentBuilder();
+			
 			Document doc = db.parse(xml);
 			
 			NodeList nlpages = doc.getElementsByTagName("page");
@@ -71,7 +77,7 @@ public class Scheme {
 			}
 			
 		}catch (Exception e){
-			e.printStackTrace();
+			throw new SchemeParseError(e);
 		}
 	}
 	
