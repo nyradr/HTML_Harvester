@@ -97,25 +97,4 @@ public class Scheme {
 	public IPageScheme getPage(String name){
 		return pages.get(name);
 	}
-	
-	public static void main(String [] a) throws Exception{
-		Scheme sc = new Scheme(new File("dtd/sample.xml"));
-		
-		for(String pn : sc.getPagesName()){
-			IPageScheme page = sc.getPage(pn);
-			
-			System.out.println("P : " + page.getPageName());
-			
-			for(String dn : page.getDatasName()){
-				IDataScheme data = page.getData(dn);
-				
-				System.out.println(" D : " + data.getDataName());
-				System.out.println("  A : " + data.isAll());
-				System.out.println("  T : " + data.getType().toString());
-				
-				for(String xp : data.getAllXPath())
-					System.out.println("  X : " + xp);
-			}
-		}
-	}
 }
