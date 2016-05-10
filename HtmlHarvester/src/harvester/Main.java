@@ -1,10 +1,12 @@
 package harvester;
 
 import java.io.File;
+import java.util.Map.Entry;
 
 import harvester.data.IData;
 import harvester.data.IPage;
 import harvester.scheme.IDataScheme;
+import harvester.scheme.IFormScheme;
 import harvester.scheme.IPageScheme;
 import harvester.scheme.Scheme;
 
@@ -37,6 +39,25 @@ class Main {
 				for(String xp : data.getAllXPath())
 					System.out.println("\t\tXPath : " + xp);
 			}
+		}
+		
+		for(String fn : sc.getFormsName()){
+			IFormScheme form = sc.getForm(fn);
+			
+			System.out.println("Form : " + form.getFormName());
+			
+			System.out.println("\tXPath : ");
+			for(String xp : form.getFormXPaths())
+				System.out.println("\t\t" + xp);
+			
+			System.out.println("\tInputs :");
+			for(Entry<String, String> ina : form.getInputsFields().entrySet())
+				System.out.println("\t\t" + ina.getKey() + " : " + ina.getValue());
+			
+			System.out.println("\tSubmit :");
+			System.out.println("\t\tRelative : " + form.isSubmitRelative());
+			for(String xp : form.getSubmitXPath())
+				System.out.println("\t\t" + xp);
 		}
 	}
 	
@@ -94,6 +115,9 @@ class Main {
 	}
 	
 	public static void main(String [] a){
-		harvTest("xml/test.xml", "ql", "https://lite.qwant.com/?q=qwant&t=web");
+		//harvTest("xml/test.xml", "ql", "https://lite.qwant.com/?q=qwant&t=web");
+		
+		testScheme("xml/sample.xml");
+		testScheme("xml/sampleform.xml");
 	}
 }
