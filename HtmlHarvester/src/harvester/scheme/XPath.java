@@ -38,14 +38,19 @@ class XPath {
 		extractBase(elem);
 		extractArgs(elem);
 		
-		for(Set<Pair<String, String>> pos : buildAllXpath(new HashSet<>())){
-			String xpath = baseXPath;
-			
-			for(Pair<String, String> e : pos)
-				xpath = xpath.replace(e.fst, e.snd);
-			
-			allXPath.add(xpath);
-		}
+		Set<Set<Pair<String, String>>> possibles = buildAllXpath(new HashSet<>());
+		
+		if(!possibles.isEmpty()){
+			for(Set<Pair<String, String>> pos : possibles){
+				String xpath = baseXPath;
+				
+				for(Pair<String, String> e : pos)
+					xpath = xpath.replace(e.fst, e.snd);
+				
+				allXPath.add(xpath);
+			}
+		}else
+			allXPath.add(baseXPath);
 	}
 	
 	/**
