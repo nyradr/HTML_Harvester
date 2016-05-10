@@ -2,6 +2,7 @@ package harvester.scheme;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,6 +23,12 @@ class FormScheme implements IFormScheme{
 	
 	public FormScheme(Node d, Map<String, IPageScheme> pages) throws SchemeParseError{
 		Element elem = (Element) d;
+		
+		inputs = new TreeMap<>();
+		
+		name = elem.getAttribute("name");
+		if(name.isEmpty())
+			throw new SchemeParseError("Invalid form name");
 		
 		extractXPath(elem);
 		extractInput(elem);

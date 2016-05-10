@@ -8,15 +8,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.xml.utils.DefaultErrorHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  * HTML harvester pages scheme
@@ -25,6 +24,7 @@ import org.xml.sax.SAXParseException;
 public class Scheme {
 	
 	private Map<String, IPageScheme> pages;
+	private Map<String, IFormScheme> forms;
 	
 	/**
 	 * Create Scheme from XML string
@@ -60,24 +60,51 @@ public class Scheme {
 	 */
 	private void loadXML(InputSource xml) throws SchemeParseError{
 		pages = new TreeMap<>();
+		forms = new TreeMap<>();
+		
 		try{
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			dbf.setValidating(true);
 			dbf.setNamespaceAware(true);
 			
 			DocumentBuilder db = dbf.newDocumentBuilder();
+			db.setErrorHandler(new DefaultErrorHandler());
 			
 			Document doc = db.parse(xml);
 			
-			NodeList nlpages = doc.getElementsByTagName("page");
-			
-			for(int i = 0; i < nlpages.getLength(); i++){
-				IPageScheme page = new PageScheme(nlpages.item(i));
-				pages.put(page.getPageName(), page);
-			}
+			extractPages(doc);
+			extractForms(doc);
 			
 		}catch (Exception e){
 			throw new SchemeParseError(e);
+		}
+	}
+	
+	/**
+	 * Extract all pages from XML scheme document
+	 * @param doc
+	 * @throws SchemeParseError
+	 */
+	private void extractPages(Document doc) throws SchemeParseError{
+		NodeList nlpages = doc.getElementsByTagName("page");
+		
+		for(int i = 0; i < nlpages.getLength(); i++){
+			IPageScheme page = new PageScheme(nlpages.item(i));
+			pages.put(page.getPageName(), page);
+		}
+	}
+	
+	/**
+	 * Extract all form from XML scheme document
+	 * @param doc
+	 * @throws SchemeParseError
+	 */
+	private void extractForms(Document doc) throws SchemeParseError{
+		NodeList nl = doc.getElementsByTagName("form");
+		
+		for(int i = 0; i < nl.getLength(); i++){
+			IFormScheme form = new FormScheme(nl.item(i), pages);
+			forms.put(form.getFormName(), form);
 		}
 	}
 	
@@ -96,5 +123,22 @@ public class Scheme {
 	 */
 	public IPageScheme getPage(String name){
 		return pages.get(name);
+	}
+	
+	/**
+	 * Get all forms name
+	 * @return
+	 */
+	public Set<String> getFormsName(){
+		return forms.keySet();
+	}
+	
+	/**
+	 * Get form scheme from form name
+	 * @param name
+	 * @return
+	 */
+	public IFormScheme getForm(String name){
+		return forms.get(name);
 	}
 }
