@@ -124,4 +124,8 @@ class XPath {
 		
 		return ret;
 	}
+	
+	public Set<String> getAllXPath(){
+		return allXPath;
+	}
 }
