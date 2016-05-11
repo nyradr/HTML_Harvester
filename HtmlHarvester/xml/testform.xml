@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE scheme SYSTEM "https://raw.githubusercontent.com/nyradr/HTML_Harvester/master/HtmlHarvester/dtd/scheme.dtd" >
+
+<!-- Scheme test on qwant lite (https://lite.qwant.com/) search
+ -->
+<scheme>
+	<page name="ql">
+		<data name="res" all="0" type="txt">
+			<xpath>//div[@class='arg1']/span[@class='arg2']/a</xpath>
+			<xargs id="arg1">
+				<arg>result</arg>
+			</xargs>
+			<xargs id="arg2">
+				<arg>title</arg>
+			</xargs>
+		</data>
+	</page>
+	<form name="fqr">
+		<path>
+			<xpath>//form</xpath>
+		</path>
+		<input name="q">qwant</input>
+		<submit>
+			<xpath>//input[@type='submit']</xpath>
+		</submit>
+		<result>ql</result>
+	</form>
+</scheme>
