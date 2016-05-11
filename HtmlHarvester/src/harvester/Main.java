@@ -1,7 +1,9 @@
 package harvester;
 
 import java.io.File;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import harvester.data.IData;
 import harvester.data.IPage;
@@ -95,7 +97,7 @@ class Main {
 	}
 	
 	/**
-	 * Harvester test
+	 * Harvester page test
 	 * @param xml
 	 * @param page
 	 * @param url
@@ -114,10 +116,33 @@ class Main {
 		}
 	}
 	
+	/**
+	 * Harvester form test
+	 * @param xml xml file 
+	 * @param form form name
+	 * @param url page url
+	 * @param inp arguments
+	 */
+	private static void formTest(String xml, String form, String url, Map<String, String> inp){
+		try{
+			Scheme sc = new Scheme(new File(xml));
+			Harvester hv = new Harvester(sc);
+			IPage ip = hv.submit(url, form, inp);
+			
+			drawScheme(sc);
+			drawPageResult(ip);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String [] a){
 		//harvTest("xml/test.xml", "ql", "https://lite.qwant.com/?q=qwant&t=web");
 		
-		testScheme("xml/sample.xml");
-		testScheme("xml/sampleform.xml");
+		//testScheme("xml/sample.xml");
+		//testScheme("xml/sampleform.xml");
+		
+		formTest("xml/testform.xml", "fqr", "https://lite.qwant.com/", new TreeMap<>());
 	}
 }
