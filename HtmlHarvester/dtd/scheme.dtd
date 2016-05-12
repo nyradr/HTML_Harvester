@@ -56,6 +56,6 @@
 <!ELEMENT xpath (#PCDATA) >
 
 <!ELEMENT xargs (arg+) >
-<!ATTLIST xargs id ID #REQUIRED >
+<!ATTLIST xargs id CDATA #REQUIRED >
 
 <!ELEMENT arg (#PCDATA) >
