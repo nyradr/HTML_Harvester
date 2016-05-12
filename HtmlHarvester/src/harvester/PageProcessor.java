@@ -67,7 +67,7 @@ class PageProcessor {
 
 		@Override
 		public String getText() {
-			if(!scheme.isAll())
+			if(!scheme.isAll() && !datas.isEmpty())
 				return datas.get(0);
 			
 			return null;
