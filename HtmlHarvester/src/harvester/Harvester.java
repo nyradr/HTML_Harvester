@@ -37,6 +37,9 @@ public class Harvester {
 	public Harvester(Scheme s, WebClient c){
 		scheme = s;
 		browser = c;
+		
+		pagep = new PageProcessor();
+		formp = new FormProcessor();
 	}
 	
 	/**
