@@ -27,6 +27,14 @@ public class Scheme {
 	private Map<String, IFormScheme> forms;
 	
 	/**
+	 * Create empty scheme
+	 */
+	public Scheme(){
+		pages = new TreeMap<>();
+		forms = new TreeMap<>();
+	}
+	
+	/**
 	 * Create Scheme from XML string
 	 * @param xml XML as string
 	 * @throws SchemeParseError
@@ -90,8 +98,16 @@ public class Scheme {
 		
 		for(int i = 0; i < nlpages.getLength(); i++){
 			IPageScheme page = new PageScheme(nlpages.item(i));
-			pages.put(page.getPageName(), page);
+			addPage(page);
 		}
+	}
+	
+	/**
+	 * Add page to the page list
+	 * @param page
+	 */
+	public void addPage(IPageScheme page){
+		pages.put(page.getPageName(), page);
 	}
 	
 	/**
@@ -104,8 +120,16 @@ public class Scheme {
 		
 		for(int i = 0; i < nl.getLength(); i++){
 			IFormScheme form = new FormScheme(nl.item(i), pages);
-			forms.put(form.getFormName(), form);
+			addForm(form);
 		}
+	}
+	
+	/**
+	 * Add form to the form list
+	 * @param form
+	 */
+	public void addForm(IFormScheme form){
+		forms.put(form.getFormName(), form);
 	}
 	
 	/**
