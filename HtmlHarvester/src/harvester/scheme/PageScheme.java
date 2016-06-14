@@ -17,6 +17,11 @@ class PageScheme implements IPageScheme{
 	private String name;
 	private Map<String, IDataScheme> datas;
 	
+	/**
+	 * Create page scheme from XML element
+	 * @param p XML node
+	 * @throws SchemeParseError
+	 */
 	public PageScheme(Node p) throws SchemeParseError{
 		Element page = (Element) p;
 		datas = new TreeMap<>();
@@ -27,8 +32,25 @@ class PageScheme implements IPageScheme{
 		
 		for(int i = 0; i < nldatas.getLength(); i++){
 			IDataScheme data = new DataScheme(nldatas.item(i));
-			datas.put(data.getDataName(), data);
+			addData(data);
 		}
+	}
+	
+	/**
+	 * Create empty page scheme
+	 * @param name page name
+	 */
+	public PageScheme(String name) {
+		this.name = name;
+		datas = new TreeMap<>();
+	}
+	
+	/**
+	 * Add data to the page scheme
+	 * @param data
+	 */
+	public void addData(IDataScheme data){
+		datas.put(data.getDataName(), data);
 	}
 	
 	@Override

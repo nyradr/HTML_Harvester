@@ -31,7 +31,7 @@ class DataScheme implements IDataScheme{
 	private XPath xpath;
 	
 	/**
-	 * DataScheme constructor
+	 * Build data scheme from XML element
 	 * @param d node element
 	 * @throws SchemeParseError
 	 */
@@ -41,6 +41,21 @@ class DataScheme implements IDataScheme{
 		extractAtt(data);
 		
 		xpath = new XPath(d);
+	}
+	
+	/**
+	 * Build data scheme
+	 * @param name scheme name
+	 * @param all 	if true if all element match the XPath is harvested<br>
+	 * 				if false only the fist element matching the XPath is harvested
+	 * @param type data type
+	 * @param xp XPath
+	 */
+	public DataScheme(String name, boolean all, DataType type, XPath xp){
+		this.name = name;
+		this.all = all;
+		this.type = type;
+		xpath = xp;
 	}
 	
 	/**
