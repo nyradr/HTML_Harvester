@@ -15,6 +15,12 @@ public interface IPageScheme {
 	public String getPageName();
 	
 	/**
+	 * Add data to the page scheme
+	 * @param data
+	 */
+	public void addData(IDataScheme data);
+	
+	/**
 	 * Get page data names
 	 * @return set of data names
 	 */

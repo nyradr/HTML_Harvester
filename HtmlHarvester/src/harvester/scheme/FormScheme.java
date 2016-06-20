@@ -21,6 +21,12 @@ class FormScheme implements IFormScheme{
 	private XPath submit;
 	private IPageScheme result;
 	
+	/**
+	 * Build form scheme from XML element and base pages
+	 * @param d
+	 * @param pages
+	 * @throws SchemeParseError
+	 */
 	public FormScheme(Node d, Map<String, IPageScheme> pages) throws SchemeParseError{
 		Element elem = (Element) d;
 		

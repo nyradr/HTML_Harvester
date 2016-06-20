@@ -45,17 +45,13 @@ class PageScheme implements IPageScheme{
 		datas = new TreeMap<>();
 	}
 	
-	/**
-	 * Add data to the page scheme
-	 * @param data
-	 */
-	public void addData(IDataScheme data){
-		datas.put(data.getDataName(), data);
-	}
-	
 	@Override
 	public String getPageName() {
 		return name;
+	}
+	
+	public void addData(IDataScheme data){
+		datas.put(data.getDataName(), data);
 	}
 
 	@Override
